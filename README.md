@@ -4,11 +4,12 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-Algorithmic stock trading with [Alpaca](https://alpaca.market)'s Stock Trading API.
+Algorithmic stock trading with [Alpaca](https://alpaca.markets/)'s Stock Trading API.
 
 ## Note
 
-Alpaca offers both paper and live market APIs. **At the current time, {alpacar} 
+Alpaca offers both paper and live market [APIs](https://alpaca.markets/docs/api-documentation/api-v2/).
+**At the current time, {alpacar} 
 is designed for use with Alpaca's *paper* (simulated) trading API**.
 
 ## Installation
