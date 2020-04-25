@@ -14,6 +14,7 @@ alpaca_orders(
   stop_price = NULL,
   extended_hours = FALSE,
   client_order_id = NULL,
+  order_class = NULL,
   take_profit = NULL,
   stop_loss = NULL
 )
@@ -43,14 +44,14 @@ time_in_force day.}
 \item{client_order_id}{string (<= 48 characters) A unique identifier for the
 order. Automatically generated if not sent.}
 
+\item{order_class}{string simple, bracket, oco or oto. For details of
+non-simple order classes, please see Bracket Order Overview}
+
 \item{take_profit}{object Additional parameters for take-profit leg of
 advanced orders limit_price string<number>Required required for bracket
 orders}
 
 \item{stop_loss}{Additional parameters for stop-loss leg of advanced orders}
-
-\item{order_class}{string simple, bracket, oco or oto. For details of
-non-simple order classes, please see Bracket Order Overview}
 }
 \value{
 a list returned by alpaca

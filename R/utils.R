@@ -44,7 +44,7 @@ parse_content <- function(x, ...) {
 readrify <- function(x) {
   tryCatch({
     readr::write_csv(x, tmp <- tempfile())
-    sh <- capture.output(x <- suppressWarnings(suppressMessages(readr::read_csv(tmp))))
+    sh <- utils::capture.output(x <- suppressWarnings(suppressMessages(readr::read_csv(tmp))))
     x
   }, error = function(e) tbl())
 }

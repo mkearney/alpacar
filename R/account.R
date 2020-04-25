@@ -29,7 +29,7 @@ pgray <- function(x) {
 }
 
 #' @export
-print.alpaca_account <- function(x) {
+print.alpaca_account <- function(x, ...) {
   cat_line(pgray("<alpaca_account>"))
   w <- nchar(x$account_number)
   cat_line("  Account Number    : ", x$account_number)

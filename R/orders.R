@@ -41,6 +41,7 @@ alpaca_orders <- function(symbol,
                           stop_price = NULL,
                           extended_hours = FALSE,
                           client_order_id = NULL,
+                          order_class = NULL,
                           take_profit = NULL,
                           stop_loss = NULL) {
   UseMethod("alpaca_orders")
@@ -56,9 +57,10 @@ alpaca_orders.default <- function(symbol,
                                   stop_price = NULL,
                                   extended_hours = FALSE,
                                   client_order_id = NULL,
+                                  order_class = NULL,
                                   take_profit = NULL,
                                   stop_loss = NULL) {
-  body <- alpaca_body(
+  body <- list(
     symbol = symbol,
     qty = qty,
     side = side,
@@ -68,6 +70,7 @@ alpaca_orders.default <- function(symbol,
     stop_price = stop_price,
     extended_hours = extended_hours,
     client_order_id = client_order_id,
+    order_class = order_class,
     take_profit = take_profit,
     stop_loss = stop_loss
   )
