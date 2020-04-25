@@ -31,6 +31,7 @@
 #' @param stop_loss Additional parameters for stop-loss leg of advanced orders
 #' @seealso https://alpaca.markets/docs/trading-on-alpaca/orders/
 #' @return a list returned by alpaca
+#' @export
 alpaca_orders <- function(symbol,
                           qty = 1,
                           side = "buy",
