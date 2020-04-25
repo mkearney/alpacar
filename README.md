@@ -71,7 +71,7 @@ alpacar::alpaca_orders(
 alpacar::alpaca_orders(
   symbol = "FB",
   qty = 10,
-  side = "buy",
+  side = "sell",
   type = "market"
 )
 ```
