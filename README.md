@@ -4,9 +4,12 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-An R package for interacting with the Stock Trading API, [Alpaca](https://alpaca.market)
+Algorithmic stock trading with [Alpaca](https://alpaca.market)'s Stock Trading API.
 
-**At the current time, this package is intended to be used for algorithmic trading with Alpaca's *paper* (simulated) trading API**
+## Note
+
+Alpaca offers both paper and live market APIs. **At the current time, {alpacar} 
+is designed for use with Alpaca's *paper* (simulated) trading API**.
 
 ## Installation
 
