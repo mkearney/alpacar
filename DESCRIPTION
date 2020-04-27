@@ -21,7 +21,6 @@ Imports:
     curl,
     dapr,
     jsonlite,
-    readr,
     utils,
     tibble
 License: MIT + file LICENSE

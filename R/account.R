@@ -24,22 +24,36 @@ alpaca_account.default <- function() {
     structure(class = c("alpaca_account", "list"))
 }
 
+# pgray <- function(x) {
+#   "\033[90m" %P% x %P% "\033[39m"
+# }
 pgray <- function(x) {
-  "\033[90m" %P% x %P% "\033[39m"
+  "\033[38;5;247m" %P% x %P% "\033[39m"
+}
+# pgold <- function(x) {
+#   "\033[38;5;221m" %P% x %P% "\033[39m"
+# }
+
+pgold <- function(x) {
+  "\033[38;5;136m" %P% x %P% "\033[39m"
 }
 
 #' @export
 print.alpaca_account <- function(x, ...) {
   cat_line(pgray("<alpaca_account>"))
   w <- nchar(x$account_number)
-  cat_line("  Account Number    : ", x$account_number)
-  cat_line("  Buying Power      : ", pint(x$buying_power, w))
-  cat_line("  Cash              : ", pint(x$cash, w))
-  cat_line("  Portfolio_value   : ", pint(x$portfolio_value, w))
-  cat_line("  Equity            : ", pint(x$equity, w))
-  cat_line("  Long Market Value : ", pint(x$long_market_value, w))
-  cat_line("  Short Market Value: ", pint(x$short_market_value, w))
-  cat_line("  Daytrade Count    : ", pint(x$daytrade_count, w))
+  cat_line("  Account Number    : ", pgold(x$account_number))
+  cat_line("  Buying Power      : ", pgold(pdbl(x$buying_power, w)))
+  cat_line("  Regt Buying Power : ", pgold(pdbl(x$regt_buying_power, w)))
+  cat_line("  Cash              : ", pgold(pdbl(x$cash, w)))
+  cat_line("  Portfolio Value   : ", pgold(pdbl(x$portfolio_value, w)))
+  cat_line("  Multiplier        : ", pgold(pint(x$multiplier, w)))
+  cat_line("  Equity            : ", pgold(pdbl(x$equity, w)))
+  cat_line("  Last Equity       : ", pgold(pdbl(x$last_equity, w)))
+  cat_line("  Long Market Value : ", pgold(pdbl(x$long_market_value, w)))
+  cat_line("  Short Market Value: ", pgold(pdbl(x$short_market_value, w)))
+  cat_line("  Initial Margin    : ", pgold(pint(x$initial_margin, w)))
+  cat_line("  Daytrade Count    : ", pgold(pint(x$daytrade_count, w)))
   cat_line(pgray("</alpaca_account>"))
   invisible(x)
 }

@@ -11,6 +11,16 @@ pint <- function(x, width = NULL) {
   }
   x
 }
+pdbl <- function(x, width = NULL) {
+  x <- as.numeric(x)
+  x <- prettyNum(round(x, 2), big.mark = ",")
+  x <- ifelse(grepl("\\.", x), x, x %P% ".00")
+  if (!is.null(width) && width > nchar(x)) {
+    sp <- paste(rep(" ", width - nchar(x)), collapse = "")
+    x <- paste0(sp, x)
+  }
+  x
+}
 is_path <- function(x) {
   is.character(x) &&
     length(x) == 1 &&
@@ -38,15 +48,45 @@ parse_content <- function(x, ...) {
   stopifnot(
     is.character(x)
   )
-  tryCatch(jsonlite::fromJSON(x, ...), error = function(e) x)
+  x <- tryCatch(jsonlite::fromJSON(x, ...), error = function(e) x)
+  parse_cols(x)
+}
+coerce_int <- function(x) suppressWarnings(as.integer(x))
+
+coerce_num <- function(x) suppressWarnings(as.numeric(x))
+coerce_dt <- function(x) suppressWarnings(as.POSIXct(x, format = "%Y-%m-%dT%H:%M:%S"))
+
+parse_cols <- function(x) {
+  UseMethod("parse_cols")
 }
 
-readrify <- function(x) {
-  tryCatch({
-    readr::write_csv(x, tmp <- tempfile())
-    sh <- utils::capture.output(x <- suppressWarnings(suppressMessages(readr::read_csv(tmp))))
-    x
-  }, error = function(e) tbl())
+parse_cols.default <- function(x) {
+  x
+}
+parse_cols.list <- function(x) {
+  dapr::lap(x, parse_cols)
+}
+
+parse_cols.data.frame <- function(x) {
+  dapr::dapc(x, parse_cols)
+}
+
+parse_cols.character <- function(x) {
+  if (length(x) == 0) {
+    return(x)
+  }
+  xnona <- grep("^[[:punct:]]$", trimws(x), invert = TRUE, value = TRUE)
+  if (all(!is.na(coerce_num(xnona)))) {
+    if (any(grepl("\\d\\.", x))) {
+      return(coerce_num(x))
+    } else {
+      return(coerce_int(x))
+    }
+  }
+  if (all(!is.na(coerce_dt(xnona)))) {
+    return(coerce_dt(x))
+  }
+  x
 }
 
 brows <- function(x) {
